@@ -10,6 +10,7 @@ An online portal for Karnavati University students where they can find all study
 - **Multiple Resource Types**: Notes, books, videos, and previous year papers
 - **No Login Required**: Open access for all students
 - **Responsive Design**: Works on desktop, tablet, and mobile devices
+- **Fully Accessible**: Keyboard navigation support and screen reader compatible
 
 ## How to Use
 
@@ -53,6 +54,13 @@ To add new study materials, edit the `script.js` file and update the `studyMater
 - HTML5
 - CSS3
 - Vanilla JavaScript (no frameworks required)
+- WCAG 2.1 accessibility standards
+
+## Security
+
+- XSS protection through safe DOM manipulation
+- Secure external links with rel="noopener noreferrer"
+- No vulnerabilities detected by CodeQL scanning
 
 ## License
 
