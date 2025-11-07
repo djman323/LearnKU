@@ -135,6 +135,13 @@ main {
     box-shadow: 0 6px 25px rgba(0, 0, 0, 0.2);
 }
 
+.semester-card:focus {
+    outline: 3px solid #fff;
+    outline-offset: 2px;
+    transform: translateY(-5px);
+    box-shadow: 0 6px 25px rgba(0, 0, 0, 0.2);
+}
+
 .semester-card h3 {
     font-size: 1.3rem;
 }
@@ -157,6 +164,14 @@ main {
 }
 
 .subject-card:hover {
+    background: #e9ecef;
+    transform: translateX(5px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.subject-card:focus {
+    outline: 3px solid #667eea;
+    outline-offset: 2px;
     background: #e9ecef;
     transform: translateX(5px);
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);

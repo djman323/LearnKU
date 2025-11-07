@@ -453,13 +453,6 @@ let currentDepartment = null;
 let currentSemester = null;
 let currentSubject = null;
 
-// Helper function to escape HTML and prevent XSS
-function escapeHtml(text) {
-    const div = document.createElement('div');
-    div.textContent = text;
-    return div.innerHTML;
-}
-
 function showSemesters(deptCode) {
     currentDepartment = deptCode;
     const dept = studyMaterials[deptCode];
@@ -477,6 +470,15 @@ function showSemesters(deptCode) {
         const semCard = document.createElement('div');
         semCard.className = 'semester-card';
         semCard.onclick = () => showSubjects(semKey);
+        semCard.tabIndex = 0;
+        semCard.role = 'button';
+        semCard.setAttribute('aria-label', `Select ${sem.name}`);
+        semCard.onkeydown = (event) => {
+            if (event.key === 'Enter' || event.key === ' ') {
+                showSubjects(semKey);
+                event.preventDefault();
+            }
+        };
         const h3 = document.createElement('h3');
         h3.textContent = sem.name;
         semCard.appendChild(h3);
@@ -507,6 +509,15 @@ function showSubjects(semesterKey) {
         const subCard = document.createElement('div');
         subCard.className = 'subject-card';
         subCard.onclick = () => showMaterials(subKey);
+        subCard.tabIndex = 0;
+        subCard.role = 'button';
+        subCard.setAttribute('aria-label', `Select ${subject.name}`);
+        subCard.onkeydown = (event) => {
+            if (event.key === 'Enter' || event.key === ' ') {
+                showMaterials(subKey);
+                event.preventDefault();
+            }
+        };
         
         const h3 = document.createElement('h3');
         h3.textContent = subject.name;
