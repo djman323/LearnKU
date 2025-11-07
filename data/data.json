@@ -1,0 +1,78 @@
+{
+  "semesters": [
+    {
+      "id": "sem1",
+      "name": "Semester 1",
+      "departments": [
+        {
+          "id": "ce",
+          "name": "Computer Engineering",
+          "subjects": [
+            {
+              "id": "math1",
+              "name": "Mathematics I",
+              "chapters": [
+                {
+                  "title": "Chapter 1 - Limits",
+                  "pdf": "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf"
+                },
+                {
+                  "title": "Chapter 2 - Differentiation",
+                  "pdf": "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf"
+                }
+              ]
+            },
+            {
+              "id": "phy1",
+              "name": "Physics I",
+              "chapters": [
+                {
+                  "title": "Chapter 1 - Mechanics",
+                  "pdf": "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "me",
+          "name": "Mechanical Engineering",
+          "subjects": [
+            {
+              "id": "eng1",
+              "name": "Engineering Mechanics",
+              "chapters": [
+                {
+                  "title": "Chapter 1 - Statics",
+                  "pdf": "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sem2",
+      "name": "Semester 2",
+      "departments": [
+        {
+          "id": "ce",
+          "name": "Computer Engineering",
+          "subjects": [
+            {
+              "id": "math2",
+              "name": "Mathematics II",
+              "chapters": [
+                {
+                  "title": "Chapter 1 - Linear Algebra",
+                  "pdf": "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
