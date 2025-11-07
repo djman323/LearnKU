@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LearnKU - Karnavati University Study Materials</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>LearnKU</h1>
+            <p class="tagline">Karnavati University Study Materials Portal</p>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="intro">
+            <h2>Welcome to LearnKU</h2>
+            <p>Find all your study materials organized by department, semester, and subject. Select your department to get started.</p>
+        </section>
+
+        <section class="departments">
+            <h2>Select Your Department</h2>
+            <div class="department-grid">
+                <div class="department-card" onclick="showSemesters('cs')" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' '){showSemesters('cs');event.preventDefault()}" role="button" aria-label="Select Computer Science department">
+                    <div class="department-icon">💻</div>
+                    <h3>Computer Science</h3>
+                    <p>B.Tech Computer Science & Engineering</p>
+                </div>
+                <div class="department-card" onclick="showSemesters('ds')" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' '){showSemesters('ds');event.preventDefault()}" role="button" aria-label="Select Data Science department">
+                    <div class="department-icon">📊</div>
+                    <h3>Data Science</h3>
+                    <p>B.Tech Data Science</p>
+                </div>
+                <div class="department-card" onclick="showSemesters('it')" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' '){showSemesters('it');event.preventDefault()}" role="button" aria-label="Select Information Technology department">
+                    <div class="department-icon">🔧</div>
+                    <h3>Information Technology</h3>
+                    <p>B.Tech Information Technology</p>
+                </div>
+                <div class="department-card" onclick="showSemesters('ec')" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' '){showSemesters('ec');event.preventDefault()}" role="button" aria-label="Select Electronics & Communication department">
+                    <div class="department-icon">⚡</div>
+                    <h3>Electronics & Communication</h3>
+                    <p>B.Tech EC Engineering</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="semesters" class="semesters" style="display: none;">
+            <button class="back-btn" onclick="backToDepartments()">← Back to Departments</button>
+            <h2 id="department-title">Select Semester</h2>
+            <div class="semester-grid" id="semester-list"></div>
+        </section>
+
+        <section id="subjects" class="subjects" style="display: none;">
+            <button class="back-btn" onclick="backToSemesters()">← Back to Semesters</button>
+            <h2 id="semester-title">Select Subject</h2>
+            <div class="subject-list" id="subject-list"></div>
+        </section>
+
+        <section id="materials" class="materials" style="display: none;">
+            <button class="back-btn" onclick="backToSubjects()">← Back to Subjects</button>
+            <h2 id="subject-title">Study Materials</h2>
+            <div class="materials-container" id="materials-list"></div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 LearnKU - Karnavati University Study Materials Portal</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
