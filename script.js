@@ -381,7 +381,7 @@ const studyMaterials = {
                         code: 'EC101',
                         materials: {
                             notes: [
-                                { title: 'Circuit Analysis', description: 'Kirchhoff\'s laws and circuit theorems', url: '#' }
+                                { title: 'Circuit Analysis', description: "Kirchhoff's laws and circuit theorems", url: '#' }
                             ]
                         }
                     }
@@ -453,6 +453,13 @@ let currentDepartment = null;
 let currentSemester = null;
 let currentSubject = null;
 
+// Helper function to escape HTML and prevent XSS
+function escapeHtml(text) {
+    const div = document.createElement('div');
+    div.textContent = text;
+    return div.innerHTML;
+}
+
 function showSemesters(deptCode) {
     currentDepartment = deptCode;
     const dept = studyMaterials[deptCode];
@@ -470,7 +477,9 @@ function showSemesters(deptCode) {
         const semCard = document.createElement('div');
         semCard.className = 'semester-card';
         semCard.onclick = () => showSubjects(semKey);
-        semCard.innerHTML = `<h3>${sem.name}</h3>`;
+        const h3 = document.createElement('h3');
+        h3.textContent = sem.name;
+        semCard.appendChild(h3);
         semesterList.appendChild(semCard);
     });
 }
@@ -498,10 +507,15 @@ function showSubjects(semesterKey) {
         const subCard = document.createElement('div');
         subCard.className = 'subject-card';
         subCard.onclick = () => showMaterials(subKey);
-        subCard.innerHTML = `
-            <h3>${subject.name}</h3>
-            <p>Course Code: ${subject.code}</p>
-        `;
+        
+        const h3 = document.createElement('h3');
+        h3.textContent = subject.name;
+        
+        const p = document.createElement('p');
+        p.textContent = `Course Code: ${subject.code}`;
+        
+        subCard.appendChild(h3);
+        subCard.appendChild(p);
         subjectList.appendChild(subCard);
     });
 }
@@ -535,13 +549,28 @@ function showMaterials(subjectKey) {
             materials[category].forEach(item => {
                 const itemDiv = document.createElement('div');
                 itemDiv.className = 'material-item';
-                itemDiv.innerHTML = `
-                    <div class="material-info">
-                        <h4>${item.title}</h4>
-                        <p>${item.description}</p>
-                    </div>
-                    <a href="${item.url}" class="material-link" target="_blank">View</a>
-                `;
+                
+                const infoDiv = document.createElement('div');
+                infoDiv.className = 'material-info';
+                
+                const h4 = document.createElement('h4');
+                h4.textContent = item.title;
+                
+                const p = document.createElement('p');
+                p.textContent = item.description;
+                
+                infoDiv.appendChild(h4);
+                infoDiv.appendChild(p);
+                
+                const link = document.createElement('a');
+                link.href = item.url;
+                link.className = 'material-link';
+                link.target = '_blank';
+                link.rel = 'noopener noreferrer';
+                link.textContent = 'View';
+                
+                itemDiv.appendChild(infoDiv);
+                itemDiv.appendChild(link);
                 itemsDiv.appendChild(itemDiv);
             });
             
