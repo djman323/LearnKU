@@ -25,7 +25,17 @@ export default function Department({ department }) {
         {department.semesters.map(sem => (
           <div key={sem.name} className="card">
             <h3>{sem.name}</h3>
-            <p>{sem.pdfs.length} PDF{sem.pdfs.length !== 1 ? 's' : ''}</p>
+            <p>{sem.subjects?.reduce((total, subject) => total + subject.pdfs.length, 0) || 0} PDF{sem.subjects?.reduce((total, subject) => total + subject.pdfs.length, 0) === 1 ? '' : 's'}</p>
+            <div style={{
+              display: 'flex',
+              gap: '0.5rem',
+              flexWrap: 'wrap',
+              marginBottom: '1rem',
+              color: 'var(--muted)',
+              fontSize: '0.9rem'
+            }}>
+              {sem.subjects?.length ? `${sem.subjects.length} Subject${sem.subjects.length === 1 ? '' : 's'}` : 'No subjects yet'}
+            </div>
             <Link href={`/department/${encodeURIComponent(department.name)}/${encodeURIComponent(sem.name)}`} className="btn">
               View Materials
             </Link>

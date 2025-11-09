@@ -18,20 +18,20 @@ export default function Home({ departments }) {
           <h1>LearnKU — Your Academic Resource Hub</h1>
           <p>Welcome to Karnavati University's premier study material platform. Access comprehensive course materials, lecture notes, and resources across all departments. Built by students, for students, to enhance your learning journey.</p>
 
-          <div className="hero-tagline" style={{marginTop: '12px', marginBottom: '20px', color: 'var(--accent-1)', fontWeight: '500'}}>
+          <div className="hero-tagline">
             Supporting Excellence in Education at Karnavati University
           </div>
 
-          <div className="hero-features" style={{marginBottom: '24px'}}>
-            <div style={{display: 'flex', gap: '16px', flexWrap: 'wrap'}}>
-              <div style={{display: 'flex', alignItems: 'center', gap: '8px', color: 'var(--muted)'}}>
-                <span style={{color: 'var(--accent-2)'}}>✓</span> Semester-wise Materials
+          <div className="hero-features">
+            <div className="feature-list">
+              <div className="feature-item">
+                <span className="feature-check">✓</span> Semester-wise Materials
               </div>
-              <div style={{display: 'flex', alignItems: 'center', gap: '8px', color: 'var(--muted)'}}>
-                <span style={{color: 'var(--accent-2)'}}>✓</span> Quick PDF Downloads
+              <div className="feature-item">
+                <span className="feature-check">✓</span> Quick PDF Downloads
               </div>
-              <div style={{display: 'flex', alignItems: 'center', gap: '8px', color: 'var(--muted)'}}>
-                <span style={{color: 'var(--accent-2)'}}>✓</span> All Departments
+              <div className="feature-item">
+                <span className="feature-check">✓</span> All Departments
               </div>
             </div>
           </div>
@@ -41,21 +41,13 @@ export default function Home({ departments }) {
             <Link href="#features" className="btn secondary">How it works</Link>
           </div>
 
-          <div style={{marginTop:20}}>
+          <div className="search-container">
             <input 
+              className="search-input"
               aria-label="Search departments" 
               placeholder="Search departments (e.g. Data Science, CE, AIML)" 
               value={q} 
               onChange={e => setQ(e.target.value)} 
-              style={{
-                width:'100%',
-                padding:'12px 16px',
-                borderRadius:12,
-                border:'1px solid rgba(255,255,255,0.08)',
-                background:'rgba(255,255,255,0.02)',
-                color:'inherit',
-                fontSize: '0.95rem'
-              }} 
             />
           </div>
         </div>
@@ -79,8 +71,8 @@ export default function Home({ departments }) {
         </div>
       </section>
 
-      <section id="features" style={{margin: '4rem 0 5rem'}}>
-        <h2 style={{marginBottom: '2.5rem', textAlign: 'center', fontSize: '2rem'}}>Why Choose LearnKU?</h2>
+      <section id="features" className="features-section">
+        <h2 className="section-title">Why Choose LearnKU?</h2>
         <div className="grid">
           <div className="card">
             <h3>Smart Organization</h3>
@@ -101,10 +93,12 @@ export default function Home({ departments }) {
         </div>
       </section>
 
-      <section id="departments" style={{marginTop: '5rem'}}>
-        <h2 style={{fontSize: '2rem', marginBottom: '1rem'}}>Departments</h2>
+      <section id="departments" className="departments-section">
+        <h2 className="section-title">Departments</h2>
 
-        <div style={{marginBottom: '2rem', color:'var(--muted)', fontSize: '1.1rem'}}>{filtered.length} department{filtered.length !== 1 ? 's' : ''} found</div>
+        <div className="section-subtitle">
+          {filtered.length} department{filtered.length !== 1 ? 's' : ''} found
+        </div>
 
         <div className="grid">
           {departments.length === 0 && (
@@ -126,7 +120,8 @@ export default function Home({ departments }) {
                     <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
                     <path d="M14 2v6h6"/>
                   </svg>
-                  {dept.semesters.reduce((sum, sem) => sum + sem.pdfs.length, 0)} PDFs
+                  {dept.semesters.reduce((sum, sem) => 
+                    sum + (sem.subjects?.reduce((total, subject) => total + subject.pdfs.length, 0) || 0), 0)} PDFs
                 </div>
               </div>
 
