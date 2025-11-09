@@ -590,11 +590,22 @@ body{
 	flex-shrink: 0;
 }
 
-.grid{
+.grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 2rem;
   align-items: stretch;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0 1rem;
+}
+
+@media (max-width: 480px) {
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    padding: 0;
+  }
 }
 
 .btn {
@@ -724,18 +735,32 @@ body{
     width: 100%;
     justify-content: center;
     padding: 0.8rem 1rem;
+    margin: 0.5rem 0;
   }
   
+  .card {
+    margin: 0.75rem 0;
+    padding: 1.25rem;
+    width: auto;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+
   .card h3 {
     font-size: 1.1rem;
+    word-wrap: break-word;
   }
   
   .card p {
     font-size: 0.95rem;
+    word-wrap: break-word;
   }
   
   .container {
     padding: 0 1rem;
+    width: 100%;
+    box-sizing: border-box;
+    overflow-x: hidden;
   }
   
   .site-header {
@@ -748,6 +773,40 @@ body{
   
   select {
     font-size: 16px; /* Prevents auto-zoom on iOS */
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .hero {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero-ctas {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+    width: 100%;
+  }
+
+  .dept-card .dept-actions {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+    width: 100%;
+  }
+
+  .materials-grid {
+    margin: 0;
+    padding: 0 1rem;
+  }
+
+  .ribbon {
+    display: inline-block;
+    width: auto;
+    max-width: 100%;
+    box-sizing: border-box;
+    margin: 0.5rem 0;
   }
 }
 
