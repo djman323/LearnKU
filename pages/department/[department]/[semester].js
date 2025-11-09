@@ -13,18 +13,20 @@ export default function SemesterMaterials({ department, semester, pdfs }) {
 
   return (
     <main className="container">
-      <h1>{department} — {semester}</h1>
-      <p>Download study materials below:</p>
+      <header style={{marginBottom:12}}>
+        <h1 style={{margin:0}}>{department} — {semester}</h1>
+        <p style={{color:'var(--muted)'}}>Download study materials below</p>
+      </header>
 
       {pdfs.length === 0 && (
-        <p>No PDFs available for this semester yet.</p>
+        <div className="card">No PDFs available for this semester yet.</div>
       )}
 
       <ul className="chapter-list">
         {pdfs.map((pdf, idx) => (
           <li key={idx} className="chapter">
             <span>{pdf.name}</span>
-            <a className="download" href={pdf.path} target="_blank" rel="noopener noreferrer">Download PDF</a>
+            <a className="download" href={pdf.path} target="_blank" rel="noopener noreferrer">Download</a>
           </li>
         ))}
       </ul>

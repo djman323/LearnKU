@@ -13,12 +13,14 @@ export default function Department({ department }) {
 
   return (
     <main className="container">
-      <h1>{department.name}</h1>
-      <p>Choose a semester to view available study materials:</p>
+      <header style={{marginBottom:12}}>
+        <h1 style={{margin:0}}>{department.name}</h1>
+        <p style={{color:'var(--muted)'}}>Choose a semester to view available study materials</p>
+      </header>
 
       <div className="grid">
         {department.semesters.length === 0 && (
-          <p>No semesters found for this department.</p>
+          <div className="card">No semesters found for this department.</div>
         )}
         {department.semesters.map(sem => (
           <div key={sem.name} className="card">
