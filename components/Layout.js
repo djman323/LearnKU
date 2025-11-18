@@ -28,7 +28,7 @@ export default function Layout({ children }) {
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen)
   }
-  
+  //just for a commit shit
   return (
     <>
       <Head>
