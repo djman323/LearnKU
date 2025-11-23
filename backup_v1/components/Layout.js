@@ -2,7 +2,6 @@
 
 import Link from 'next/link'
 import { useState, useEffect } from 'react'
-import CursorParticles from './CursorParticles'
 
 export default function Layout({ children }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -33,7 +32,7 @@ export default function Layout({ children }) {
   //just for a commit shit 2 commit lol
   return (
     <>
-      <CursorParticles />
+
       <header className="site-header">
         <div className="inner">
           <div className="brand">
@@ -66,7 +65,7 @@ export default function Layout({ children }) {
       <div className="bg-blobs" aria-hidden></div>
 
       <div className="page-shell">
-        <aside className={`sidebar ${isMenuOpen ? 'open' : ''}`} aria-label="Primary navigation">
+        <aside className="sidebar" aria-label="Primary navigation">
           <div className="sidebar-inner">
             <div className="sidebar-brand">
               <Link href="/" className="sidebar-logo">
