@@ -12,7 +12,6 @@ const nextConfig = {
   // Disable unnecessary features for static export
   experimental: {
     // This disables server components as they're not needed for static export
-    appDir: false,
   }
 }
 
