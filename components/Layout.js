@@ -6,26 +6,12 @@ import CursorParticles from './CursorParticles'
 
 export default function Layout({ children }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
-  const [theme, setTheme] = useState('dark')
+  const [theme] = useState('dark')
 
   useEffect(() => {
-    // Check if user has a theme preference
-    const savedTheme = localStorage.getItem('theme')
-    if (savedTheme) {
-      setTheme(savedTheme)
-      document.documentElement.setAttribute('data-theme', savedTheme)
-    } else if (window.matchMedia('(prefers-color-scheme: light)').matches) {
-      setTheme('light')
-      document.documentElement.setAttribute('data-theme', 'light')
-    }
+    // Force the site to use dark theme only
+    document.documentElement.setAttribute('data-theme', 'dark')
   }, [])
-
-  const toggleTheme = () => {
-    const newTheme = theme === 'dark' ? 'light' : 'dark'
-    setTheme(newTheme)
-    document.documentElement.setAttribute('data-theme', newTheme)
-    localStorage.setItem('theme', newTheme)
-  }
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen)
@@ -55,9 +41,6 @@ export default function Layout({ children }) {
           <nav className={`main-nav ${isMenuOpen ? 'active' : ''}`}>
             <Link href="/">Home</Link>
             <Link href="#departments">Departments</Link>
-            <button onClick={toggleTheme} className="theme-toggle" aria-label="Toggle theme">
-              {theme === 'dark' ? '🌞' : '🌙'}
-            </button>
             <a href="#" className="primary-cta">Upload</a>
           </nav>
         </div>
