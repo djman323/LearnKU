@@ -2,49 +2,88 @@
 
 import Link from 'next/link'
 import { useState, useEffect } from 'react'
+import { motion, useScroll, useTransform } from 'framer-motion'
 import CursorParticles from './CursorParticles'
 
 export default function Layout({ children }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [theme] = useState('dark')
+  const { scrollY } = useScroll()
+  
+  const headerOpacity = useTransform(scrollY, [0, 100], [0.8, 0.95])
+  const headerBlur = useTransform(scrollY, [0, 100], [10, 20])
 
   useEffect(() => {
-    // Force the site to use dark theme only
     document.documentElement.setAttribute('data-theme', 'dark')
   }, [])
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen)
   }
-  //just for a commit shit 2 commit lol
+
   return (
     <>
       <CursorParticles />
-      <header className="site-header">
+      <motion.header 
+        className="site-header"
+        style={{
+          backgroundColor: useTransform(
+            scrollY,
+            [0, 100],
+            ['rgba(10, 12, 16, 0.7)', 'rgba(10, 12, 16, 0.95)']
+          ),
+          backdropFilter: `blur(${headerBlur}px)`,
+        }}
+      >
         <div className="inner">
-          <div className="brand">
+          <motion.div 
+            className="brand"
+            whileHover={{ scale: 1.05 }}
+            transition={{ type: "spring", stiffness: 300 }}
+          >
             <Link href="/" className="logo">
-              <span className="logo-mark">LK</span>
+              <motion.span 
+                className="logo-mark"
+                whileHover={{ rotate: 360 }}
+                transition={{ duration: 0.5 }}
+              >
+                LK
+              </motion.span>
               <span className="logo-text">
                 <span className="text-gradient">Learn</span>
                 <span className="text-accent">KU</span>
               </span>
             </Link>
-          </div>
+          </motion.div>
 
           <button className="menu-toggle" onClick={toggleMenu} aria-label="Toggle menu">
-            <span></span>
-            <span></span>
-            <span></span>
+            <motion.span
+              animate={isMenuOpen ? { rotate: 45, y: 6 } : { rotate: 0, y: 0 }}
+              transition={{ duration: 0.2 }}
+            />
+            <motion.span
+              animate={isMenuOpen ? { opacity: 0 } : { opacity: 1 }}
+              transition={{ duration: 0.2 }}
+            />
+            <motion.span
+              animate={isMenuOpen ? { rotate: -45, y: -6 } : { rotate: 0, y: 0 }}
+              transition={{ duration: 0.2 }}
+            />
           </button>
 
           <nav className={`main-nav ${isMenuOpen ? 'active' : ''}`}>
-            <Link href="/">Home</Link>
-            <Link href="#departments">Departments</Link>
-            <a href="#" className="primary-cta">Upload</a>
+            <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.95 }}>
+              <Link href="/">Home</Link>
+            </motion.div>
+            <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.95 }}>
+              <Link href="#departments">Departments</Link>
+            </motion.div>
+            <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.95 }}>
+              <a href="#" className="primary-cta">Upload</a>
+            </motion.div>
           </nav>
         </div>
-      </header>
+      </motion.header>
       {/* decorative layered background blobs for a premium look */}
       <div className="bg-blobs" aria-hidden></div>
 
