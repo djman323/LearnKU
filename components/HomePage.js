@@ -74,7 +74,7 @@ function TiltCard({ children, className }) {
     )
 }
 
-function ParallaxSection({ children, speed = 0.5 }) {
+function ParallaxSection({ children, speed = 0.5, scale = false, opacity = false }) {
     const ref = useRef(null)
     const { scrollYProgress } = useScroll({
         target: ref,
@@ -82,9 +82,17 @@ function ParallaxSection({ children, speed = 0.5 }) {
     })
     
     const y = useTransform(scrollYProgress, [0, 1], [100 * speed, -100 * speed])
+    const scaleValue = useTransform(scrollYProgress, [0, 0.5, 1], [0.95, 1, 0.95])
+    const opacityValue = useTransform(scrollYProgress, [0, 0.3, 0.7, 1], [0.6, 1, 1, 0.6])
+    
+    const style = {
+        y,
+        ...(scale && { scale: scaleValue }),
+        ...(opacity && { opacity: opacityValue })
+    }
     
     return (
-        <motion.div ref={ref} style={{ y }} className="parallax-layer">
+        <motion.div ref={ref} style={style} className="parallax-layer">
             {children}
         </motion.div>
     )
@@ -316,17 +324,17 @@ export default function HomePage({ departments }) {
                                 </g>
                             </svg>
                         </motion.div>
-                    </ParallaxSection>
+                </ParallaxSection>
                 </section>
 
-                <ScrollReveal direction="up">
+                <ParallaxSection speed={0.1} scale opacity>
                     <section id="features" className="features-section">
                         <motion.h2 
                             className="section-title"
-                            initial={{ opacity: 0, y: 30 }}
+                            initial={{ opacity: 0, y: 50 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
-                            transition={{ duration: 0.6 }}
+                            transition={{ duration: 0.7, ease: "easeOut" }}
                         >
                             Why Choose LearnKU?
                         </motion.h2>
@@ -406,25 +414,26 @@ export default function HomePage({ departments }) {
                             ))}
                         </motion.div>
                     </section>
-                </ScrollReveal>
+                </ParallaxSection>
 
-                <ScrollReveal direction="up">
+                <ParallaxSection speed={0.15} scale opacity>
                     <section id="departments" className="departments-section">
                         <motion.h2 
                             className="section-title"
-                            initial={{ opacity: 0, scale: 0.9 }}
-                            whileInView={{ opacity: 1, scale: 1 }}
+                            initial={{ opacity: 0, scale: 0.9, y: 50 }}
+                            whileInView={{ opacity: 1, scale: 1, y: 0 }}
                             viewport={{ once: true }}
-                            transition={{ duration: 0.6 }}
+                            transition={{ duration: 0.8, ease: "easeOut" }}
                         >
                             Explore Departments
                         </motion.h2>
 
                         <motion.div 
                             className="section-subtitle"
-                            initial={{ opacity: 0 }}
-                            whileInView={{ opacity: 1 }}
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
+                            transition={{ delay: 0.2 }}
                         >
                             {filtered.length} department{filtered.length !== 1 ? 's' : ''} found
                         </motion.div>
@@ -501,26 +510,12 @@ export default function HomePage({ departments }) {
                                                 <path d="M5 12h14M12 5l7 7-7 7"/>
                                             </motion.svg>
                                         </MagneticButton>
-                                        <motion.div 
-                                            className="ribbon"
-                                            whileHover={{ scale: 1.1 }}
-                                            animate={{ 
-                                                boxShadow: [
-                                                    '0 0 0 rgba(56, 189, 248, 0)',
-                                                    '0 0 20px rgba(56, 189, 248, 0.5)',
-                                                    '0 0 0 rgba(56, 189, 248, 0)'
-                                                ]
-                                            }}
-                                            transition={{ duration: 2, repeat: Infinity }}
-                                        >
-                                            Explore
-                                        </motion.div>
                                     </div>
                                 </TiltCard>
                             ))}
                         </motion.div>
                     </section>
-                </ScrollReveal>
+                </ParallaxSection>
 
                 <ParallaxSection speed={0.2}>
                     <motion.footer 
